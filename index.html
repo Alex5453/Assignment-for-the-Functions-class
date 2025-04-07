@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Тесты домашних заданий</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jasmine-core@3.10.1/lib/jasmine-core/jasmine.css">
+</head>
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/jasmine-core@3.10.1/lib/jasmine-core/jasmine.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jasmine-core@3.10.1/lib/jasmine-core/jasmine-html.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jasmine-core@3.10.1/lib/jasmine-core/boot0.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jasmine-core@3.10.1/lib/jasmine-core/boot1.js"></script>
+
+  <!-- Скрипты с домашними задачами -->
+  <script src="task.js"></script>
+  <script src="getArrayParams.js"></script>
+  <script src="Attachments.js"></script>
+  <script src="makeWork.js"></script>
+
+  <!-- Тесты -->
+  <script>
+    describe("Задача 1: Квадратное уравнение", function () {
+      it("корни уравнения x² - 5x + 6 = 0 — это 2 и 3", function () {
+        const roots = solveEquation(1, -5, 6);
+        expect(roots).toContain(2);
+        expect(roots).toContain(3);
+        expect(roots.length).toBe(2);
+      });
+    });
+
+    describe("Задача 2: Ипотечный калькулятор", function () {
+      it("процент 10, взнос 0, сумма 50000, срок 12 мес — должно быть 52749.53", function () {
+        expect(calculateTotalMortgage(10, 0, 50000, 12)).toBeCloseTo(52749.53, 2);
+      });
+    });
+
+    describe("Задача 3: getArrayParams", function () {
+      it("на входе [1,2,3,-100,10] — min: -100, max: 10, avg: -16.8", function () {
+        const result = getArrayParams(1, 2, 3, -100, 10);
+        expect(result.min).toBe(-100);
+        expect(result.max).toBe(10);
+        expect(result.avg).toBeCloseTo(-16.8, 1);
+      });
+    });
+
+    describe("Задача 4: Attachments.js функции", function () {
+      it("summElementsWorker([1,2,3]) должно вернуть 6", function () {
+        expect(summElementsWorker(1,2,3)).toBe(6);
+      });
+
+      it("differenceMaxMinWorker([10,5,20]) должно вернуть 15", function () {
+        expect(differenceMaxMinWorker(10, 5, 20)).toBe(15);
+      });
+
+      it("differenceEvenOddWorker([2,3,4,5]) должно вернуть -2", function () {
+        expect(differenceEvenOddWorker(2, 3, 4, 5)).toBe(2 - (3 + 5));
+      });
+
+      it("averageEvenElementsWorker([2,4,6,7]) должно вернуть 4", function () {
+        expect(averageEvenElementsWorker(2,4,6,7)).toBe(4);
+      });
+    });
+
+    describe("Задача 5: makeWork", function () {
+      it("возвращает максимальный результат работы summElementsWorker", function () {
+        const arr = [
+          [10, 10, 10],
+          [20, 20, 20],
+          [30, 30, 30]
+        ];
+        expect(makeWork(arr, summElementsWorker)).toBe(90);
+      });
+    });
+  </script>
+</body>
+</html>
